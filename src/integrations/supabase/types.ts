@@ -14,13 +14,162 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      appointments: {
+        Row: {
+          client_email: string | null
+          client_name: string
+          client_note: string | null
+          client_phone: string
+          created_at: string
+          date: string
+          duration_min: number
+          id: string
+          owner_note: string | null
+          price: number | null
+          salon_id: string
+          service_id: string | null
+          service_name: string
+          source: string
+          start_time: string
+          status: string
+        }
+        Insert: {
+          client_email?: string | null
+          client_name: string
+          client_note?: string | null
+          client_phone: string
+          created_at?: string
+          date: string
+          duration_min?: number
+          id?: string
+          owner_note?: string | null
+          price?: number | null
+          salon_id: string
+          service_id?: string | null
+          service_name: string
+          source?: string
+          start_time: string
+          status?: string
+        }
+        Update: {
+          client_email?: string | null
+          client_name?: string
+          client_note?: string | null
+          client_phone?: string
+          created_at?: string
+          date?: string
+          duration_min?: number
+          id?: string
+          owner_note?: string | null
+          price?: number | null
+          salon_id?: string
+          service_id?: string | null
+          service_name?: string
+          source?: string
+          start_time?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "appointments_salon_id_fkey"
+            columns: ["salon_id"]
+            isOneToOne: false
+            referencedRelation: "salons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      salons: {
+        Row: {
+          address: string | null
+          cover_url: string | null
+          created_at: string
+          description: string | null
+          id: string
+          logo_url: string | null
+          monthly_report: boolean
+          name: string
+          notify_email: boolean
+          owner_id: string
+          paid_until: string | null
+          phone: string | null
+          plan_status: string
+          services: Json
+          slug: string
+          suspended: boolean
+          theme_color: string
+          trial_ends_at: string
+          working_hours: Json
+        }
+        Insert: {
+          address?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          logo_url?: string | null
+          monthly_report?: boolean
+          name: string
+          notify_email?: boolean
+          owner_id: string
+          paid_until?: string | null
+          phone?: string | null
+          plan_status?: string
+          services?: Json
+          slug: string
+          suspended?: boolean
+          theme_color?: string
+          trial_ends_at?: string
+          working_hours?: Json
+        }
+        Update: {
+          address?: string | null
+          cover_url?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          logo_url?: string | null
+          monthly_report?: boolean
+          name?: string
+          notify_email?: boolean
+          owner_id?: string
+          paid_until?: string | null
+          phone?: string | null
+          plan_status?: string
+          services?: Json
+          slug?: string
+          suspended?: boolean
+          theme_color?: string
+          trial_ends_at?: string
+          working_hours?: Json
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      busy_slots: {
+        Args: { _date: string; _slug: string }
+        Returns: {
+          duration_min: number
+          start_time: string
+        }[]
+      }
+      request_appointment: {
+        Args: {
+          _client_email: string
+          _client_name: string
+          _client_note: string
+          _client_phone: string
+          _date: string
+          _service_id: string
+          _slug: string
+          _start: string
+        }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never
