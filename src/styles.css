@@ -142,3 +142,76 @@
     color: var(--color-foreground);
   }
 }
+
+/* =====================================================================
+   Celaje — identidad iOS: fondo casi negro, azul sistema, tarjetas muy
+   redondeadas y tipografía del sistema.
+   ===================================================================== */
+@theme inline {
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-surface: var(--surface);
+  --color-surface-row: var(--surface-row);
+}
+
+:root {
+  --radius: 1.25rem;
+  --background: oklch(0.155 0.012 285);
+  --foreground: oklch(0.97 0.002 285);
+  --card: oklch(0.225 0.009 285);
+  --card-foreground: oklch(0.97 0.002 285);
+  --popover: oklch(0.225 0.009 285);
+  --popover-foreground: oklch(0.97 0.002 285);
+  --primary: oklch(0.63 0.2 258);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.275 0.01 285);
+  --secondary-foreground: oklch(0.97 0.002 285);
+  --muted: oklch(0.275 0.01 285);
+  --muted-foreground: oklch(0.755 0.006 285);
+  --accent: oklch(0.3 0.012 285);
+  --accent-foreground: oklch(0.97 0.002 285);
+  --destructive: oklch(0.68 0.2 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.63 0.2 258);
+  --surface: oklch(0.225 0.009 285);
+  --surface-row: oklch(0.275 0.01 285);
+  --ok: oklch(0.76 0.16 155);
+  --ok-soft: oklch(0.76 0.16 155 / 16%);
+  --warn: oklch(0.8 0.14 62);
+  --warn-soft: oklch(0.8 0.14 62 / 16%);
+  color-scheme: dark;
+}
+
+/* Color de marca elegible por cada negocio. */
+.theme-naranja { --primary: oklch(0.63 0.2 258); --ring: oklch(0.63 0.2 258); }
+.theme-esmeralda { --primary: oklch(0.79 0.12 220); --primary-foreground: oklch(0.2 0.05 250); --ring: oklch(0.79 0.12 220); }
+.theme-azul { --primary: oklch(0.55 0.21 280); --ring: oklch(0.55 0.21 280); }
+.theme-morado { --primary: oklch(0.63 0.19 305); --ring: oklch(0.63 0.19 305); }
+.theme-rosa { --primary: oklch(0.68 0.16 350); --ring: oklch(0.68 0.16 350); }
+.theme-dorado { --primary: oklch(0.65 0.01 285); --ring: oklch(0.65 0.01 285); }
+
+body {
+  background-image:
+    radial-gradient(ellipse 900px 620px at 92% -8%, oklch(0.63 0.2 258 / 18%), transparent 68%),
+    radial-gradient(ellipse 760px 600px at -18% 72%, oklch(0.55 0.21 280 / 12%), transparent 72%);
+  background-attachment: fixed;
+}
+
+@utility cj-card {
+  border-radius: 1.75rem;
+  background: linear-gradient(145deg, oklch(0.245 0.01 285), oklch(0.19 0.008 285));
+  border: 1px solid var(--border);
+  box-shadow: 0 15px 35px -18px oklch(0 0 0 / 55%), inset 0 1px 0 oklch(1 0 0 / 5%);
+}
+
+@utility cj-glass {
+  background: oklch(0.22 0.01 285 / 72%);
+  border: 1px solid oklch(1 0 0 / 10%);
+  backdrop-filter: blur(28px) saturate(165%);
+  -webkit-backdrop-filter: blur(28px) saturate(165%);
+}
