@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as RegistroRouteImport } from './routes/registro'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedPanelRouteImport } from './routes/_authenticated/panel'
+import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
 import { Route as ReservarSlugRouteImport } from './routes/reservar.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -40,6 +41,11 @@ const AuthenticatedPanelRoute = AuthenticatedPanelRouteImport.update({
   path: '/panel',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/auth/callback',
+  path: '/auth/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReservarSlugRoute = ReservarSlugRouteImport.update({
   id: '/reservar/$slug',
   path: '/reservar/$slug',
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/registro': typeof RegistroRoute
   '/reset-password': typeof ResetPasswordRoute
   '/panel': typeof AuthenticatedPanelRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/reservar/$slug': typeof ReservarSlugRoute
 }
 export interface FileRoutesByTo {
@@ -58,6 +65,7 @@ export interface FileRoutesByTo {
   '/registro': typeof RegistroRoute
   '/reset-password': typeof ResetPasswordRoute
   '/panel': typeof AuthenticatedPanelRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/reservar/$slug': typeof ReservarSlugRoute
 }
 export interface FileRoutesById {
@@ -67,14 +75,26 @@ export interface FileRoutesById {
   '/registro': typeof RegistroRoute
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/panel': typeof AuthenticatedPanelRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/reservar/$slug': typeof ReservarSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/registro' | '/reset-password' | '/panel' | '/reservar/$slug'
+    | '/'
+    | '/registro'
+    | '/reset-password'
+    | '/panel'
+    | '/auth/callback'
+    | '/reservar/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/registro' | '/reset-password' | '/panel' | '/reservar/$slug'
+  to:
+    | '/'
+    | '/registro'
+    | '/reset-password'
+    | '/panel'
+    | '/auth/callback'
+    | '/reservar/$slug'
   id:
     | '__root__'
     | '/'
@@ -82,6 +102,7 @@ export interface FileRouteTypes {
     | '/registro'
     | '/reset-password'
     | '/_authenticated/panel'
+    | '/auth/callback'
     | '/reservar/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -90,6 +111,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   RegistroRoute: typeof RegistroRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  AuthCallbackRoute: typeof AuthCallbackRoute
   ReservarSlugRoute: typeof ReservarSlugRoute
 }
 
@@ -130,6 +152,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPanelRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/auth/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reservar/$slug': {
       id: '/reservar/$slug'
       path: '/reservar/$slug'
@@ -156,6 +185,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   RegistroRoute: RegistroRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  AuthCallbackRoute: AuthCallbackRoute,
   ReservarSlugRoute: ReservarSlugRoute,
 }
 export const routeTree = rootRouteImport
